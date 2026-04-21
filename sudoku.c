@@ -18,13 +18,11 @@ void printGrid(int grid[9][9]) {
 
     for (int i = 0; i < 9; i++) {
 
-        // горизонтальная линия
         if (i % 3 == 0 && i != 0)
             printf("---------------------\n");
 
         for (int j = 0; j < 9; j++) {
 
-            // вертикальная линия
             if (j % 3 == 0 && j != 0)
                 printf("| ");
 
@@ -56,7 +54,6 @@ int isValid(int grid[SIZE][SIZE], int row, int col, int num) {
     return 1;
 }
 
-// логика
 int applyLogic(int grid[SIZE][SIZE]) {
     int changed = 0;
 
@@ -92,13 +89,11 @@ int findEmpty(int grid[SIZE][SIZE], int *row, int *col) {
     return 0;
 }
 
-// 🔥 ИСПРАВЛЕННЫЙ ГИБРИД
 int solveSudoku(int grid[SIZE][SIZE]) {
 
     int backup[SIZE][SIZE];
-    memcpy(backup, grid, sizeof(backup)); // сохраняем состояние
+    memcpy(backup, grid, sizeof(backup));
 
-    // логика
     while (applyLogic(grid));
 
     int row, col;
@@ -111,14 +106,14 @@ int solveSudoku(int grid[SIZE][SIZE]) {
         if (isValid(grid, row, col, num)) {
 
             int temp[SIZE][SIZE];
-            memcpy(temp, grid, sizeof(temp)); // копия перед пробой
+            memcpy(temp, grid, sizeof(temp)); 
 
             grid[row][col] = num;
 
             if (solveSudoku(grid))
                 return 1;
 
-            memcpy(grid, temp, sizeof(temp)); // откат ВСЕГО состояния
+            memcpy(grid, temp, sizeof(temp)); 
         }
     }
 
@@ -129,7 +124,7 @@ int main() {
 
     int sudoku[9][9];
 
-    inputGrid(sudoku); // 👈 ввод от пользователя
+    inputGrid(sudoku);
 
     printf("\nYour Sudoku:\n");
     printGrid(sudoku);
